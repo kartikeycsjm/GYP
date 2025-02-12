@@ -2,7 +2,9 @@
 import React, { useRef, useState } from 'react'
 import { LogInCredentials } from './action';
 import { Loader2 } from "lucide-react";
+import { useRouter } from 'next/navigation';
 const SignInComponent = () => {
+    const router=useRouter()
     const formref = useRef<HTMLFormElement>(null)
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState('')
@@ -16,6 +18,7 @@ const SignInComponent = () => {
         setMessage(error)
         console.log(res);
         formref.current?.reset()
+        router.push('/')
     }
     return (
         <div className='w-full'>
