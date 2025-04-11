@@ -48,7 +48,8 @@ const Page = () => {
   return (
     <div className='w-full min-h-screen'>
       <div className='w-[90%] border rounded-lg m-auto flex flex-col md:w-[40%]'>
-        <div className='flex gap-3 mx-5 mt-5'>
+        <div className='flex flex-col gap-3 mx-5 mt-5
+        md:flex-row'>
           <div>
             <label className='m-2 text-[18px] font-semibold'>First Name</label>
             <input
