@@ -14,7 +14,7 @@ export const LogInCredentials = async (formdata: FormData) => {
         if (response?.error) {
             throw new Error(response.error);
         }
-
+        
         return { status: 'success', error: '' };
     } catch (error) {
         return { status: 'failed', error: (error as Error).message };
