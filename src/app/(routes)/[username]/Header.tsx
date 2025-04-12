@@ -1,7 +1,10 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-const Header = ({firstName,lastName,about}) => {
+const Header = ({ firstName, lastName, about }: {
+    firstName: string,
+    lastName: string, about: string
+}) => {
     return (
         <div className='mx-5 min-h-screen
     md:mx-32 bg-[#000625]'>
@@ -9,7 +12,7 @@ const Header = ({firstName,lastName,about}) => {
                 <div className='relative top-5 flex justify-between
                 items-center'>
                     <h1 className='text-[40px] font-bold'>
-                        {firstName+' '+lastName}
+                        {firstName + ' ' + lastName}
                     </h1>
                     <button className='px-2 
                     py-1 border rounded-lg'>
@@ -49,8 +52,8 @@ const Header = ({firstName,lastName,about}) => {
                     <p>23 profile visit</p>
                 </div>
             </header>
-           
-            
+
+
         </div>
     )
 }
