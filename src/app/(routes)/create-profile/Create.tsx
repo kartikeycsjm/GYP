@@ -7,7 +7,7 @@ import { saveProfile } from './action'
 import { fetchProfile } from './action'
 import { projectType } from '@/Types'
 import { UserProfile } from '@/Types'
-
+import Link from 'next/link'
 const Page = () => {
   const [projects, setProjects] = useState<projectType[]>([])
   const [project, setProject] = useState<projectType>({
@@ -29,13 +29,16 @@ const Page = () => {
   const [gender, setGender] = useState('')
   const [about, setAbout] = useState('')
   const [dob, setDob] = useState('')
-
+  let [loading, setLoading] = useState(false);
+  let [webLink, setWebLink] = useState('');
   const handleSubmit = async () => {
+    setLoading(true)
     if (!firstName || !lastName || !contact) {
       alert('Please fill in all required fields')
       return
     }
-
+    let trimmedFname = firstName.trim()
+    let trimmedLname = firstName.trim();
     const data: UserProfile = {
       firstName,
       lastName,
@@ -49,6 +52,7 @@ const Page = () => {
       links,
     }
     await saveProfile(data)
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -56,7 +60,8 @@ const Page = () => {
       const x = await fetchProfile();
       let data = x.data;
       let Main = data ? JSON.parse(data) : null;
-      
+      console.log(Main);
+
       if (Main) {
         setFirstName(Main.firstName || '');
         setLastName(Main.lastName || '');
@@ -68,6 +73,7 @@ const Page = () => {
         setSkills(Main.skills || []);
         setProjects(Main.projects || []);
         setLinks(Main.links || []);
+        setWebLink(Main.username)
       }
     };
     fetchData();
@@ -75,7 +81,9 @@ const Page = () => {
 
   return (
     <div className='my-5 w-full min-h-screen'>
+
       <div className='w-[90%] border rounded-lg m-auto flex flex-col md:w-[40%]'>
+
         <div className='flex flex-col gap-3 mx-5 mt-5 md:flex-row justify-between'>
           <div>
             <label className='m-2 text-[18px] font-semibold'>First Name</label>
@@ -186,9 +194,16 @@ const Page = () => {
         <button
           onClick={handleSubmit}
           className='p-2 m-7 rounded-lg bg-green-600 font-bold'>
-          Save
+          {loading ? 'Saving' : 'Save'}
         </button>
       </div>
+      <div className=''>
+        <Link className='underline text-[15px]'
+          href={`https://getyourprofile.vercel.app/${webLink}`}>
+          Visit Your Portfolio
+        </Link>
+      </div>
+
     </div>
   )
 }

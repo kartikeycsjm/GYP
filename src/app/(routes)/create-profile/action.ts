@@ -23,29 +23,28 @@ export const saveProfile = async (data: UserProfile) => {
     }
 
     const id = user._id;
+    let firstName = data.lastName.trim();
+    let lastName = data.firstName.trim();
 
-    // Generate unique username with 5 random digits
     let username: string = "";
     let isUnique = false;
-
-    while (!isUnique) {
-      const tempUsername = 
-      `${data.lastName}${data.firstName}
-      ${Math.floor(10000 + Math.random() * 90000)}`;
-      const exists = await 
-      ProfileSchema.findOne({ username: tempUsername });
-      if (!exists) {
-        username = tempUsername;
-        isUnique = true;
-      }
-    }
-
-    const existing = await 
-    ProfileSchema.findOne({ id });
+    const existing = await
+      ProfileSchema.findOne({ id });
 
     if (existing) {
       await ProfileSchema.updateOne({ id }, { $set: { ...data } });
     } else {
+
+      while (!isUnique) {
+        const tempUsername =
+          `${lastName}${firstName}${Math.floor(10000 + Math.random() * 90000)}`;
+        const exists = await
+          ProfileSchema.findOne({ username: tempUsername });
+        if (!exists) {
+          username = tempUsername;
+          isUnique = true;
+        }
+      }
       await ProfileSchema.create({
         ...data,
         id,
@@ -83,7 +82,7 @@ export const fetchProfile = async () => {
     }
 
     const id = user._id;
-    
+
     // Fetch the profile
     const profile = await ProfileSchema.findOne({ id }).lean();
 
@@ -92,8 +91,8 @@ export const fetchProfile = async () => {
       return { success: false, error: "Profile not found" };
     }
     console.log(profile);
-    const data=JSON.stringify(profile)
-    return { success: true,data};
+    const data = JSON.stringify(profile)
+    return { success: true, data };
   } catch (error) {
     console.error("Error fetching profile:", error);
     return { success: false, error: "Internal server error" };

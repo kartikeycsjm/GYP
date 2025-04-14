@@ -8,12 +8,16 @@ const page = async () => {
     return (
       <div className='w-full h-screen
       flex items-center justify-center'>
-        please login first <Link href={'signin'}>Login</Link>
+        please login first 
+        <Link 
+        className='flex text-[15px] underline' 
+        href={'signin'}>Login</Link>
       </div>
     )
   }
   return (
-    <div>
+    <div className='flex flex-col'>
+      <h1 className='mx-5 my-2 text-[20px] font-bold'>{session.user?.name}</h1>
       <Create />
     </div>
   )
