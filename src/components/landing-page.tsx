@@ -34,7 +34,7 @@ const page = () => {
                         <div className="flex items-center justify-center">
                             <div className="relative w-full h-[350px] md:h-[400px] lg:h-[500px]">
                                 <Image
-                                    src="/dp.jpg"
+                                    src="/dp.png"
                                     alt="Portfolio preview"
                                     fill
                                     className="object-contain rounded-lg shadow-2xl border"
