@@ -1,5 +1,4 @@
 'use server'
-
 import { auth } from "@/auth";
 import { Connect } from "@/db/Connection";
 import { UserProfile } from "@/Types";
@@ -30,15 +29,19 @@ export const saveProfile = async (data: UserProfile) => {
     let isUnique = false;
 
     while (!isUnique) {
-      const tempUsername = `${data.lastName}${data.firstName}${Math.floor(10000 + Math.random() * 90000)}`;
-      const exists = await ProfileSchema.findOne({ username: tempUsername });
+      const tempUsername = 
+      `${data.lastName}${data.firstName}
+      ${Math.floor(10000 + Math.random() * 90000)}`;
+      const exists = await 
+      ProfileSchema.findOne({ username: tempUsername });
       if (!exists) {
         username = tempUsername;
         isUnique = true;
       }
     }
 
-    const existing = await ProfileSchema.findOne({ id });
+    const existing = await 
+    ProfileSchema.findOne({ id });
 
     if (existing) {
       await ProfileSchema.updateOne({ id }, { $set: { ...data } });
@@ -96,3 +99,4 @@ export const fetchProfile = async () => {
     return { success: false, error: "Internal server error" };
   }
 };
+

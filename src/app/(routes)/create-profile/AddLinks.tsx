@@ -68,6 +68,7 @@ const AddLink = ({ link, links, setLink, setLinks }: AddLinksProps) => {
             m-2 rounded-lg'>
                 <span className='text-[20px]'>+</span> Add Link
             </button>
+
             {
                 openLinkInput &&
                 <div className='inset-0 fixed 

@@ -1,35 +1,41 @@
 import React from 'react'
 import Link from 'next/link'
 import { auth, signOut } from '@/auth';
+import { Briefcase, ChevronRight, Code, Cpu, Globe, Layers, Palette, Sparkles } from "lucide-react"
+
 const Header = async () => {
     const session = await auth();
     return (
-        <header className='w-full min-h-[70px] flex items-center bg-[#0000008f] sticky top-0
-         backdrop-blur-md'>
-            <div className='mx-4 flex w-full justify-between'>
-                <h1 className='text-[2.5rem] font-bold'>
-                    GYP
-                </h1>
-                    {!session ?
-                        <div className='w-[140px] flex items-center justify-between'>
-                            <Link className='px-2 py-1 duration-300 hover:underline'
-                                href={'/signin'}>Sign In</Link>
-                            <Link className='px-2 py-1 duration-300 hover:underline '
-                                href={'signup'}>Sign Up</Link>
-                        </div>
-                        :
-                        <form className='w-[80px] flex items-center justify-between'
+        <header className="px-4 lg:px-6 h-16 flex items-center justify-between border-b">
+            <Link href="/" className="flex items-center gap-2 font-bold text-xl">
+                <Briefcase className="h-6 w-6" />
+                <span>PortfolioGen</span>
+            </Link>
+            <div className="flex items-center gap-4">
+                {!session ? <>
+                    <Link href="/signin">
+                        <button className="px-4 py-2 text-sm font-medium hover:bg-gray-100 rounded-md transition-colors">
+                            Sign in
+                        </button>
+                    </Link>
+                    <Link href="/signup">
+                        <button className="px-4 py-2 text-sm font-medium bg-black text-white hover:bg-gray-800 rounded-md transition-colors">
+                            Sign up
+                        </button>
+                    </Link>
+                </> :
+                    <form className='w-[100px] flex items-center justify-between'
                         action={async () => {
                             'use server'
                             await signOut()
                         }}>
-                            <button type='submit'
-                                className='px-2 py-1 duration-300 hover:underline'>
-                                Sign Out
-                            </button>
-                        </form>
-                    }
-                </div>
+                        <button type='submit' className="px-4 py-2 text-sm font-medium bg-black 
+                        text-white hover:bg-gray-800 rounded-md transition-colors">
+                            Sign out
+                        </button>
+                    </form>
+                }
+            </div>
         </header>
     )
 }

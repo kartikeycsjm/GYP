@@ -52,12 +52,9 @@ const Header = ({ firstName, lastName, about }: {
                     <p>23 profile visit</p>
                 </div>
             </header>
-
-
         </div>
     )
 }
-
 export default Header
 
 
