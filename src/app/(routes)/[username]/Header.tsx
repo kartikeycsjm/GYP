@@ -1,9 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-const Header = ({ firstName, lastName, about }: {
+const Header = ({ firstName, lastName, about,image }: {
     firstName: string,
-    lastName: string, about: string
+    lastName: string, about: string,image:string
 }) => {
     return (
         <div className='mx-5 min-h-screen
@@ -40,7 +40,7 @@ const Header = ({ firstName, lastName, about }: {
                 </div>
                 <div className="size-[350px] rounded-lg my-8 md:size-[450px] relative">
                     <Image
-                        src="/dp.jpg"
+                        src={image}
                         alt="Profile Picture"
                         layout="fill"
                         objectFit="cover"
