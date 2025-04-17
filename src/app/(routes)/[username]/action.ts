@@ -3,7 +3,6 @@
 import { auth } from "@/auth";
 import { Connect } from "@/db/Connection";
 import ProfileSchema from "@/db/models/ProfileSchema";
-import User from "@/db/models/UserSchema";
 
 export const fetchProfile = async (username:string) => {
     try {

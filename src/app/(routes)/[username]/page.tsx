@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { Globe, Github, Mail, MapPin, Calendar, User } from "lucide-react"
 import { fetchProfile } from "./action"
 import { auth } from "@/auth"
+import UserModel from "@/db/models/UserSchema";
 
 const fetchData = async (username: string) => {
     try {
@@ -24,8 +25,12 @@ const Page = async ({
 }) => {
     const username = (await params).username
     const profile = await fetchData(username)
+    let image='';
+    const getImage = async () => {
+        const data = await UserModel.findById(profile.id);
+        image=data.image;
+    }
     const session = await auth()
-
     if (!profile) {
         notFound()
     }
@@ -38,7 +43,7 @@ const Page = async ({
                     <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                         <div className="w-40 h-40 rounded-full overflow-hidden bg-gray-300 flex-shrink-0">
                             <Image
-                                src={session?.user?.image || `/placeholder.svg?height=160&width=160`}
+                                src={image || `/placeholder.svg?height=160&width=160`}
                                 alt={profile.firstName || profile.username || "Profile"}
                                 width={160}
                                 height={160}
