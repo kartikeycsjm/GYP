@@ -197,7 +197,7 @@ const Page = () => {
           {loading ? 'Saving' : 'Save'}
         </button>
       </div>
-      <div className=''>
+      <div className='border p-2 m-6 rounded font-bold'>
         <Link className='underline text-[15px]'
           href={`http://localhost:3000/${webLink}`}>
           Visit Your Portfolio

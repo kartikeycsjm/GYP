@@ -9,37 +9,28 @@ import User from "@/db/models/UserSchema";
 export const saveProfile = async (data: UserProfile) => {
   try {
     await Connect();
-
     const session = await auth();
     const email = session?.user?.email;
-
     if (!email) {
       return { success: false, error: "User not authenticated" };
     }
-
     const user = await User.findOne({ email });
     if (!user) {
       return { success: false, error: "User not found" };
     }
-
     const id = user._id;
     let firstName = data.lastName.trim();
     let lastName = data.firstName.trim();
-
     let username: string = "";
     let isUnique = false;
-    const existing = await
-      ProfileSchema.findOne({ id });
-
+    const existing = await ProfileSchema.findOne({ id });
     if (existing) {
       await ProfileSchema.updateOne({ id }, { $set: { ...data } });
     } else {
-
       while (!isUnique) {
         const tempUsername =
           `${lastName}${firstName}${Math.floor(10000 + Math.random() * 90000)}`;
-        const exists = await
-          ProfileSchema.findOne({ username: tempUsername });
+        const exists = await ProfileSchema.findOne({ username: tempUsername });
         if (!exists) {
           username = tempUsername;
           isUnique = true;
@@ -63,26 +54,17 @@ export const saveProfile = async (data: UserProfile) => {
 
 export const fetchProfile = async () => {
   try {
-    // Connect to the database
     await Connect();
-
-    // Get the current session
     const session = await auth();
     const email = session?.user?.email;
-
     if (!email) {
       return { success: false, error: "User not authenticated" };
     }
-
-    // Find the user from the email
     const user = await User.findOne({ email });
-
     if (!user) {
       return { success: false, error: "User not found" };
     }
-
     const id = user._id;
-
     // Fetch the profile
     const profile = await ProfileSchema.findOne({ id }).lean();
 
