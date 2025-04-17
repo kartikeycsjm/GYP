@@ -30,6 +30,7 @@ const Page = async ({
         const data = await UserModel.findById(profile.id);
         image=data.image;
     }
+    await getImage();
     const session = await auth()
     if (!profile) {
         notFound()
