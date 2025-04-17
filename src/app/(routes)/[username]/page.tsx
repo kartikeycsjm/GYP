@@ -20,9 +20,9 @@ const fetchData = async (username: string) => {
 const Page = async ({
     params,
 }: {
-    params: { username: string }
+    params: Promise<{ username: string }>
 }) => {
-    const username = params.username
+    const username = (await params).username
     const profile = await fetchData(username)
     const session = await auth()
 
