@@ -39,7 +39,7 @@ const Page = async ({
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Header/Hero Section */}
-            <div className="bg-black text-white py-20 px-4">
+            <div className="bg-blue-300 text-black py-20 px-4">
                 <div className="container mx-auto max-w-5xl">
                     <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                         <div className="w-40 h-40 rounded-full overflow-hidden bg-gray-300 flex-shrink-0">
