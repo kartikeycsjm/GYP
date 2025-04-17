@@ -94,7 +94,7 @@ const Page = async ({
             <div className="container mx-auto max-w-5xl px-4 py-12">
                 {/* Skills Section */}
                 <section className="mb-16">
-                    <h2 className="text-2xl font-bold mb-6 pb-2 border-b">Skills</h2>
+                    <h2 className="text-2xl font-bold text-black mb-6 pb-2 border-b">Skills</h2>
                     <div className="flex flex-wrap gap-2">
                         {profile.skills &&
                             profile.skills.map((skill: string, index: number) => (
